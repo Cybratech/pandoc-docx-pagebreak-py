@@ -30,10 +30,6 @@ class DocxPagebreak(object):
     </w:sdtContent>
 </w:sdt>
 """, format="openxml")
-    tocName = "Inhaltsverzeichnis"
-
-    def prepare(self, doc):
-        self.tocName = doc.get_metadata('toc-name', default="Inhaltsverzeichnis");
 
     def action(self, elem, doc):
         if isinstance(elem, pf.RawBlock):
@@ -44,8 +40,9 @@ class DocxPagebreak(object):
             elif elem.text == r"\toc":
                 if doc.format == "docx":
                     pf.debug("Table of Contents")
-                    tocN = str(self.tocName);
-                    splitted = tocN.split();
+                    tocN = str(doc.get_metadata('toc-name', default="Inhaltsverzeichnis"))
+                    pf.debug(doc.get_metadata('toc-name'))
+                    splitted = tocN.split()
                     para = []
                     for curString in splitted:
                         para.append(pf.Para(pf.Str(curString)))
