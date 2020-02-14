@@ -42,12 +42,13 @@ class DocxPagebreak(object):
                     pf.debug("Table of Contents")
                     tocN = str(doc.get_metadata('toc-name', default="Inhaltsverzeichnis"))
                     pf.debug(doc.get_metadata('toc-name'))
-                    splitted = tocN.split()
+                    #splitted = tocN.split()
                     para = []
-                    for curString in splitted:
-                        pf.debug(curString)
-                        para.append(pf.Para(pf.Str(curString)))
-                        para.append(pf.Para(pf.Space()))
+                    para.append(pf.Str(tocN))
+                    #for curString in splitted:
+                    #   pf.debug(curString)
+                    #    para.append(pf.Para(pf.Str(curString)))
+                    #    para.append(pf.Para(pf.Space()))
                     div = pf.Div(*para, attributes={"custom-style": "TOC Heading"})
                     elem = [div, self.toc]
                 else:
