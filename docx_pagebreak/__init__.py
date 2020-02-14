@@ -44,7 +44,7 @@ class DocxPagebreak(object):
                     pf.debug(doc.get_metadata('toc-name'))
                     #splitted = tocN.split()
                     para = []
-                    para.append(pf.para(pf.Str(tocN)))
+                    para.append(pf.Para(pf.Str(tocN)))
                     #for curString in splitted:
                     #   pf.debug(curString)
                     #    para.append(pf.Para(pf.Str(curString)))
