@@ -31,22 +31,24 @@ class DocxPagebreak(object):
 </w:sdt>
 """, format="openxml")
 
+    def prepare(doc):
+        doc.tocName = doc.get_metadata('toc-name', default="Inhaltsverzeichnis");
+
     def action(self, elem, doc):
         if isinstance(elem, pf.RawBlock):
             if elem.text == r"\newpage":
-                if (doc.format == "docx"):
+                if doc.format == "docx":
                     pf.debug("Page Break")
                     elem = self.pagebreak
-            # elif elem.text == r"\newsection":
-            #     if (doc.format == "docx"):
-            #         pf.debug("Section Break")
-            #         elem = self.sectionbreak
-            #     else:
-            #         elem = []
             elif elem.text == r"\toc":
-                if (doc.format == "docx"):
+                if doc.format == "docx":
                     pf.debug("Table of Contents")
-                    para = [pf.Para(pf.Str("Table"), pf.Space(), pf.Str("of"), pf.Space(), pf.Str("Contents"))]
+                    tocN = str(doc.tocName);
+                    splitted = tocN.split();
+                    para = []
+                    for curString in splitted:
+                        para.append(pf.Para(pf.Str(curString)))
+                        para.append(pf.Para(pf.space()))
                     div = pf.Div(*para, attributes={"custom-style": "TOC Heading"})
                     elem = [div, self.toc]
                 else:
