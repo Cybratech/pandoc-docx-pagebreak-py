@@ -49,7 +49,7 @@ class DocxPagebreak(object):
                     para = []
                     for curString in splitted:
                         para.append(pf.Para(pf.Str(curString)))
-                        para.append(pf.Para(pf.space()))
+                        para.append(pf.Para(pf.Space()))
                     div = pf.Div(*para, attributes={"custom-style": "TOC Heading"})
                     elem = [div, self.toc]
                 else:
