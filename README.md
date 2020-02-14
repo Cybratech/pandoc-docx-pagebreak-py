@@ -5,7 +5,7 @@ Pandoc filter to insert page break or table-of-contents in docx file
 ### install
 
 ```bash
-pip3 install git+https://github.com/pandocker/pandoc-docx-pagebreak-py
+pip3 install git+https://github.com/Cybratech/pandoc-docx-pagebreak-py
 ```
 
 ### Usage
@@ -14,12 +14,6 @@ pip3 install git+https://github.com/pandocker/pandoc-docx-pagebreak-py
     - Expecting to work like native pandoc behavior for latex output
 - Add `\toc` where preferred to insert TOC(Table of Contents)
     - unable to use with `--toc` otherwise TOC appears on head of document also
-<!--
-- Add `\newsection` where preferred to insert a section break
-    - Only works for docx output
-    - It resets page header/footer style to _portrait, US-letter_ sized pages with whatever reference file you used,
-    except the last section in the file. **_You will have to fix them to your preference._**
--->
 
 ```bash
 # Try the filter with this file like this:
@@ -49,3 +43,20 @@ Contents before pagebreak
 \newpage
 
 Contents after _Page Break_
+
+### Renaming the TOC
+
+The default name of the TOC wille be `Inhaltsverzeichnis`. If you want to rename it, you can simply add a meta-info named `toc-name` with a value of the name.
+
+For instance in an markdown-file:
+
+```md
+---
+title: Document Title
+toc-name: <Name to set>
+---
+
+\toc
+
+\newpage
+```
